@@ -1,7 +1,20 @@
 import React, { Component } from "react";
 import "./App.css";
-import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+  background-color: ${(props) => (props.alt ? "red" : "green")};
+  color: white;
+  padding: 12px 32px;
+  cursor: pointer;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: ${(props) => (props.alt ? "salmon" : "lightgreen")};
+    color: black;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -50,17 +63,17 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      padding: "12px 16px",
-      cursor: "pointer",
-      borderRadius: "6px",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black",
-      },
-    };
+    // const style = {
+    //   backgroundColor: "green",
+    //   color: "white",
+    //   padding: "12px 16px",
+    //   cursor: "pointer",
+    //   borderRadius: "6px",
+    //   ":hover": {
+    //     backgroundColor: "lightgreen",
+    //     color: "black",
+    //   },
+    // };
 
     let persons = null;
 
@@ -80,11 +93,11 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black",
-      };
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black",
+      // };
     }
 
     let classes = [];
@@ -97,16 +110,17 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Members</h1>
-          <p className={classes.join(" ")}>App is working</p>
-          <button style={style} onClick={this.togglePersonsHandler}>
-            {this.state.showPersons ? "Hide Names" : "Show Names"}
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Members</h1>
+        <p className={classes.join(" ")}>App is working</p>
+        <StyledButton
+          alt={this.state.showPersons}
+          onClick={this.togglePersonsHandler}
+        >
+          {this.state.showPersons ? "Hide Names" : "Show Names"}
+        </StyledButton>
+        {persons}
+      </div>
     );
     // return React.createElement(
     //   "div",
@@ -116,4 +130,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+export default App;
