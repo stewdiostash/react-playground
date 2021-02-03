@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.css";
 import Person from "./Person/Person";
 // import styled from "styled-components";
 
@@ -63,17 +63,7 @@ class App extends Component {
   };
 
   render() {
-    // const style = {
-    //   backgroundColor: "green",
-    //   color: "white",
-    //   padding: "12px 16px",
-    //   cursor: "pointer",
-    //   borderRadius: "6px",
-    //   ":hover": {
-    //     backgroundColor: "lightgreen",
-    //     color: "black",
-    //   },
-    // };
+    let btnClass = "";
 
     let persons = null;
 
@@ -93,32 +83,26 @@ class App extends Component {
           })}
         </div>
       );
-      // style.backgroundColor = "red";
-      // style[":hover"] = {
-      //   backgroundColor: "salmon",
-      //   color: "black",
-      // };
+
+      btnClass = classes.Red;
     }
 
-    let classes = [];
+    let assignedClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold");
+      assignedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Members</h1>
-        <p className={classes.join(" ")}>App is working</p>
-        <StyledButton
-          alt={this.state.showPersons}
-          onClick={this.togglePersonsHandler}
-        >
+        <p className={assignedClasses.join(" ")}>App is working</p>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
           {this.state.showPersons ? "Hide Names" : "Show Names"}
-        </StyledButton>
+        </button>
         {persons}
       </div>
     );
